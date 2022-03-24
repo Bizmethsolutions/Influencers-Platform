@@ -1,7 +1,7 @@
 Step 1 : Install Xampp On Local Machine.<br>
 Step 2 : After installing go to xampp/httpdocs/<br>
 Step 3 : Create a new folder and paste all folder and files in newly created folder.<br>
-Step 4 : Create 1 database in phpmyadmin and upload sql file.<br>
+Step 4 : Open phpmyadmin Create 1 database and upload sql file.<br>
 Step 5 : Make changes in .env file <br>
 
 Env file Changes<br>
