@@ -1,5 +1,13 @@
 @extends('layout.brandmaster')
 @section('content')
+<!--Plugin CSS file with desired skin-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+
+<!--jQuery-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!--Plugin JavaScript file-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 <style>
     .form-control{
         min-height:47px;
@@ -52,6 +60,10 @@
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+    .range-slider {
+        position: relative;
+        height: 80px;
     }
   </style>
   <div id="loader" style="width:100vw;height:100vh;background-color: #fff;display: none;">
@@ -133,11 +145,31 @@
         </div>
         <div class="col-md-3">
           <label>Followers</label><br>
-          <input id="price_min" name="price_min" type="range" min="1" max="100" value="100" />
+          <!-- <input type="text" id="js-range-slider" name="my_range" value=""
+              data-type="double"
+              data-min="0"
+              data-max="1000"
+              data-from="200"
+              data-to="500"
+              data-grid="true"
+          />   -->
+          <div class="range-slider">
+              <input type="text" class="js-range-slider" value="" />
+          </div>
+          <div class="extra-controls">
+              <input type="hidden" name="follower_min" class="js-input-from" value="0" />
+              <input type="hidden" name="follower_max" class="js-input-to" value="0" />
+          </div>
         </div>
         <div class="col-md-3">
           <label>Age</label><br>
-          <input id="price_min" name="price_min" type="range" min="18" max="60" value="60" />
+          <div class="range-slider">
+              <input type="text" class="js-range-slider1" value="" />
+          </div>
+          <div class="extra-controls">
+              <input type="hidden" name="age_min" class="age-from" value="0" />
+              <input type="hidden" name="age_max" class="age-to" value="0" />
+          </div>
         </div>
 
         <div class="col-md-3">
@@ -185,3 +217,137 @@
     </div>
   <!-- Container-fluid Ends-->
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+// $.getScript('https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js',function(){
+//     $("#js-range-slider").ionRangeSlider({
+//         type: "double",
+//         min: 0,
+//         max: 1000,
+//         from: 200,
+//         to: 500,
+//         onStart: updateInputs,
+//         onChange: updateInputs,
+//         grid: true
+//      });
+//   }); //script
+$.getScript('https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js',function(){
+  var $range = $(".js-range-slider"),
+    $inputFrom = $(".js-input-from"),
+    $inputTo = $(".js-input-to"),
+    instance,
+    min = 0,
+    max = 1000,
+    from = 0,
+    to = 0;
+
+  var $range1 = $(".js-range-slider1"),
+    $agefrom = $(".age-from"),
+    $ageto = $(".age-to"),
+    instance1,
+    agemin = 18,
+    agemax = 50,
+    agefrom = 0,
+    ageto = 0;
+
+$range.ionRangeSlider({
+  skin: "round",
+    type: "double",
+    min: min,
+    max: max,
+    from: 200,
+    to: 800,
+    onStart: updateInputs,
+    onChange: updateInputs
+});
+instance = $range.data("ionRangeSlider");
+$range1.ionRangeSlider({
+  skin: "round",
+    type: "double",
+    min: agemin,
+    max: agemax,
+    from: 20,
+    to: 40,
+    onStart: ageupdateInputs,
+    onChange: ageupdateInputs
+});
+instance1 = $range1.data("ionRangeSlider");
+
+function updateInputs (data) {
+  from = data.from;
+    to = data.to;
+    
+    $inputFrom.prop("value", from);
+    $inputTo.prop("value", to); 
+}
+function ageupdateInputs (data) {
+    agefrom = data.from;
+    ageto = data.to;
+    
+    $agefrom.prop("value", agefrom);
+    $ageto.prop("value", ageto); 
+}
+
+$inputFrom.on("input", function () {
+    var val = $(this).prop("value");
+    
+    // validate
+    if (val < min) {
+        val = min;
+    } else if (val > to) {
+        val = to;
+    }
+    
+    instance.update({
+        from: val
+    });
+});
+
+$agefrom.on("input", function () {
+    var val = $(this).prop("value");
+    
+    // validate
+    if (val < min) {
+        val = min;
+    } else if (val > to) {
+        val = to;
+    }
+    
+    instance1.update({
+        from: val
+    });
+});
+
+$inputTo.on("input", function () {
+    var val = $(this).prop("value");
+    
+    // validate
+    if (val < from) {
+        val = from;
+    } else if (val > max) {
+        val = max;
+    }
+    
+    instance.update({
+        to: val
+    });
+});
+
+$ageto.on("input", function () {
+    var val = $(this).prop("value");
+    
+    // validate
+    if (val < from) {
+        val = from;
+    } else if (val > max) {
+        val = max;
+    }
+    
+    instance1.update({
+        to: val
+    });
+});
+
+
+});
+</script>
