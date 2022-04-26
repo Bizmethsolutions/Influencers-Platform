@@ -94,7 +94,7 @@
 <script type="text/javascript">
     jQuery(document).ready(function() {
       jQuery('#city').select2({
-          placeholder: 'City'
+          placeholder: 'Country'
       });
       jQuery('#language').select2({
           placeholder: 'Language'

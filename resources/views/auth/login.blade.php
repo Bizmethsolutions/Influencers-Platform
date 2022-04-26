@@ -12,7 +12,7 @@
           <div class="login-main"> 
             <div class="row">
               <div class="col-md-4">
-                <a href="{{ url('brand/login') }}"><button class="btn btn-primary">Brand</button></a>
+                <a href="{{ url('brand/login') }}"><button class="btn btn-primary">Brand Creator</button></a>
               </div>
               <div class="col-md-4">
                 <a href="{{ url('agency/login') }}"><button class="btn btn-primary">Agency</button></a>
