@@ -41,15 +41,9 @@ Route::group(['middleware'=>'customAuth'],function(){
     Route::get('agency/dashboard', function () { return view('agency-dashboard'); });
     Route::get('agency/search','App\Http\Controllers\AgencyController@search');
     Route::post('agency/searchQuery','App\Http\Controllers\AgencyController@searchQuery');
-    Route::get('agency/create-brands','App\Http\Controllers\AgencyController@createbrands');
-    Route::get('agency/edit-brands/{id}','App\Http\Controllers\AgencyController@editbrands');
-    Route::get('agency/delete-brands/{id}/{name}','App\Http\Controllers\AgencyController@delete_brands');
+    Route::get('agency/create-brands',function () { return view('agency.create'); });
     Route::post('agency/createBrands','App\Http\Controllers\AgencyController@create_brands');
-    Route::post('agency/updateBrands','App\Http\Controllers\AgencyController@update_brands');
     Route::get('agency/list-brands','App\Http\Controllers\AgencyController@list_brands');
-    Route::get('agency/profile','App\Http\Controllers\AgencyController@profile');
-    Route::post('agency/profile-update','App\Http\Controllers\AgencyController@profile_update' );
-    Route::get('agency/logout','App\Http\Controllers\AgencyAuthController@logout');
 
     //Brand
     Route::get('brand/dashboard', function () { return view('brand-dashboard'); });
@@ -94,7 +88,7 @@ Route::group(['middleware'=>'sessionCheck'],function(){
 
     // Brand Route
     Route::get('agency/login', function () { return view('agency.login'); });
-    Route::get('agency/register', 'App\Http\Controllers\AgencyAuthController@register');
+    Route::get('agency/register', function () { return view('agency.register'); });
 
     // Influencer Route
     Route::get('influencer/login', function () { return view('influencer.login'); });

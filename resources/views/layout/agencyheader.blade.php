@@ -14,7 +14,7 @@
       </form>
       <div class="header-logo-wrapper col-auto p-0">
         <div class="logo-wrapper">
-          <a href="{{ url('agency/dashboard') }}">
+          <a href="{{ url('brand/dashboard') }}">
             <img class="img-fluid" src="{{ asset('images/logo/logo.png') }}" alt="">
           </a>
         </div>
@@ -34,10 +34,10 @@
               </div>
             </div>
             <ul class="profile-dropdown onhover-show-div">
-              <li><a href="{{ url('/agency/profile') }}"><i data-feather="user"></i><span>Profile </span></a></li>
+              <li><a href="{{ url('/brand/profile') }}"><i data-feather="user"></i><span>Profile </span></a></li>
               <li><a href="#"><i data-feather="mail"></i><span>Email Verification</span></a></li>
               <li><a href="#"><i data-feather="phone"></i><span>Phone Verification</span></a></li>
-              <li><a href="{{ url('agency/logout') }}"><i data-feather="log-in"> </i><span>Logout</span></a></li>
+              <li><a href="{{ url('brand/logout') }}"><i data-feather="log-in"> </i><span>Logout</span></a></li>
             </ul>
           </li>
         </ul>

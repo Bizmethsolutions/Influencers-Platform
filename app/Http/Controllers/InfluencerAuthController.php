@@ -15,10 +15,9 @@ class InfluencerAuthController extends Controller
         $validateData = $req->validate([
             'name'     => 'required|min:3|max:35',
             'email'    => 'required|email',
-            'city'     => 'required',
-            'language' => 'required',
+            'location' => 'required',
             'age'      => 'required',
-            'gender'   => 'required',
+            'gender'      => 'required',
             'foi'      => 'required|array',
             'password' => 'required|min:3|max:20',
     		// 'cpassword' => 'required|min:3|max:20|same:password',
@@ -33,10 +32,9 @@ class InfluencerAuthController extends Controller
             $foi = implode(', ', $data['foi']);
             $influencer = new User;
             $influencer->name = $data['name'];
-            $influencer->city = $data['city'];
+            $influencer->location = $data['location'];
             $influencer->age = $data['age'];
             $influencer->gender = $data['gender'];
-            $influencer->language = $data['language'];
             $influencer->foi = $foi;
             $influencer->email = $data['email'];
             $encrypted_password = crypt::encrypt($data['password']);
@@ -46,38 +44,6 @@ class InfluencerAuthController extends Controller
             $req->session()->put('type','Influencer');
             $req->session()->put('email',$data['email']);
             $req->session()->put('name',$data['name']);
-            $myresult = DB::table('users')->where('email',$data['email'])->get();
-            $req->session()->put('id',$myresult[0]->id);
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-              CURLOPT_URL => 'https://kg5wc8lpab.execute-api.eu-central-1.amazonaws.com/dev',
-              CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_ENCODING => '',
-              CURLOPT_MAXREDIRS => 10,
-              CURLOPT_TIMEOUT => 0,
-              CURLOPT_FOLLOWLOCATION => true,
-              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-              CURLOPT_CUSTOMREQUEST => 'POST',
-              CURLOPT_POSTFIELDS =>'{
-                "InfluencerID":"Influencer'.$myresult[0]->id.'",
-                "InfluencerGender":"'.$data['gender'].'",
-                "InfluencerFollowers":"",
-                "InfluencerInterstes":"'.$foi.'",
-                "InfluencerAge":"'.$data['age'].'",
-                "InfluencerBrands":"",
-                "InfluencerInstaID":"",
-                "InfluencerEMAIL":"'.$data['email'].'",
-                "InfluencerFullName":"'.$data['name'].'",
-                "InfluencerCity":"'.$data['city'].'",
-                "InfluencerLanguage":"'.$data['language'].'"
-            }',
-              CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-              ),
-            ));
-            $response = curl_exec($curl);
-            curl_close($curl);
-            
             return redirect('/influencer/dashboard');
             //return redirect('/register');
         }

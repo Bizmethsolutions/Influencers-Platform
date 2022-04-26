@@ -58,12 +58,10 @@ class InfluencerController extends Controller
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => 'POST',
           CURLOPT_POSTFIELDS =>'{
-            "InfluencerID":"Influencer'.$pro['id'].'",
+            "InfluencerID":"'.$name.'",
             "InfluencerGender":"'.$gender.'",
             "InfluencerFollowers":"'.$followers.'",
             "InfluencerInterstes":"'.$foi.'",
-            "InfluencerAge":"'.$age.'",
-            "InfluencerInstaID":"",
             "InfluencerBrands":"'.$brands.'",
             "InfluencerEMAIL":"'.$pro['email'].'",
             "InfluencerFullName":"'.$name.'",
@@ -74,7 +72,6 @@ class InfluencerController extends Controller
             'Content-Type: application/json'
           ),
         ));
-        
         $response = curl_exec($curl);
         curl_close($curl);
         

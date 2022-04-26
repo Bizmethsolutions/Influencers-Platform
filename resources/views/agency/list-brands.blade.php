@@ -29,13 +29,14 @@
     <div class="page-title">
       <div class="row">
         <div class="col-6">
-          <h3>List of Brands</h3>
+          <h3>
+             Create Protfolio</h3>
         </div>
         <div class="col-6">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index-2.html"><i data-feather="home"></i></a></li>
             <li class="breadcrumb-item">Dashboard</li>
-            <li class="breadcrumb-item active">List of Brands</li>
+            <li class="breadcrumb-item active">Create Portfolio</li>
           </ol>
         </div>
       </div>
@@ -54,19 +55,15 @@
   <!-- Container-fluid starts-->
   <div class="container-fluid">
     <div class="row size-column">
-      <div class="col-md-12">
-          <a href="{{ url('agency/create-brands')}}" class="btn btn-primary">Add Brand</a>
-      </div>
-      <div class="col-xl-12 box-col-12 xl-100" style="margin-top: 20px;">
+      <div class="col-xl-12 box-col-12 xl-100">
         <table class="table table-bordered" id="myTable">
             <thead>
               <tr>
                   <th>Name</th>
                   <th>Language</th>
-                  <th>Country</th>
+                  <th>City</th>
                   <th>Email</th>
                   <th>Brand Type</th>
-                  <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -77,10 +74,6 @@
                     <td>{{ $value->city }}</td>
                     <td>{{ $value->email }}</td>
                     <td>{{ $value->brand_type }}</td>
-                    <td>
-                      <a href="{{ url('agency/edit-brands') }}/{{$value->id}}" class="btn btn-primary" >Edit</a>
-                      <a href="{{ url('agency/delete-brands') }}/{{$value->id}}/{{$value->name}}" class="btn btn-danger">Delete</a>
-                    </td>
                 </tr>
               @endforeach
             </tbody>

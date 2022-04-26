@@ -31,6 +31,7 @@ class BrandController extends Controller
         $data= array('name' => $name,'brand_type' => $brand_type,'language'=>$language,'city'=>$city,'agency'=>$agency);
         DB::table('brands')->where('email', $pro['email'])->update($data);
         $curl = curl_init();
+
         curl_setopt_array($curl, array(
           CURLOPT_URL => 'https://o6zw8vqdpd.execute-api.eu-central-1.amazonaws.com/dev',
           CURLOPT_RETURNTRANSFER => true,
@@ -41,8 +42,6 @@ class BrandController extends Controller
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => 'POST',
           CURLOPT_POSTFIELDS =>'{
-            "BrandID":"Brand'.$pro['id'].'",
-            "BrandEmail":"'.$pro['email'].'",
             "BrandName":"'.$name.'",
             "BrandType":"'.$brand_type.'",
             "BrandLanguage":"'.$language.'",
@@ -55,7 +54,7 @@ class BrandController extends Controller
         ));
 
         $response = curl_exec($curl);
-        
+
         curl_close($curl);
         //echo $response;
         return redirect('/brand/profile')->with('success', 'Profile updated successfully');
