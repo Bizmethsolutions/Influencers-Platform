@@ -32,6 +32,8 @@ class BrandAuthController extends Controller
             $req->session()->flash('error','User has been registered successfully');
             $req->session()->put('type','Brand');
             $req->session()->put('email',$data['email']);
+            $myresult = DB::table('brands')->where('email',$data['email'])->get();
+            $req->session()->put('id',$myresult[0]->id);
             return redirect('/brand/dashboard');
             //return redirect('/register');
         }
