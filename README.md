@@ -1,20 +1,3 @@
-Step 1 : Install Xampp On Local Machine.<br>
-Step 2 : After installing go to xampp/httpdocs/<br>
-Step 3 : Create a new folder and paste all folder and files in newly created folder.<br>
-Step 4 : Open phpmyadmin Create 1 database and upload sql file.<br>
-Step 5 : Make changes in .env file <br>
-
-Env file Changes<br>
-APP_URL=https://bizmeth.co.in/BI/ // change according to your local enviroment<br>
-
-DB_DATABASE=bizmed4p_BI // db name<br>
-DB_USERNAME=bizmed4p_BI // db username<br>
-DB_PASSWORD=BI@2021 // db password<br>
-
-Step 6 : Now Access website localhost/foldername<br>
-
-
-
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

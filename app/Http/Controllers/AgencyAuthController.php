@@ -21,6 +21,7 @@ class AgencyAuthController extends Controller
     function registerUser(Request $req){    
         $validateData = $req->validate([
             'email' => 'required|email',
+            'mobile' => 'required',
             'password' => 'required|min:6|max:12',
         ]);
         $result = DB::table('agency')
@@ -36,12 +37,14 @@ class AgencyAuthController extends Controller
             $agency->language = $data['language'];
             $agency->city = $data['city'];
             $agency->agency = $data['agency'];
+            $agency->mobile = $data['mobile'];
             $encrypted_password = crypt::encrypt($data['password']);
             $agency->password = $encrypted_password;
             $agency->save();
             $req->session()->flash('error','User has been registered successfully');
             $req->session()->put('type','Agency');
             $req->session()->put('email',$data['email']);
+            $req->session()->put('name',$data['name']);
 
             $myresult = DB::table('agency')->where('email',$data['email'])->get();
             $req->session()->put('id',$myresult[0]->id);
@@ -61,6 +64,7 @@ class AgencyAuthController extends Controller
                 "AgencyInterstes":"'.$data['agency'].'",
                 "AgencyEmail":"'.$data['email'].'",
                 "AgencyCity":"'.$data['city'].'",
+                "AgencyNumber":"'.$data['mobile'].'",
                 "AgencyLanguage":"'.$data['language'].'"
             }',
               CURLOPT_HTTPHEADER => array(
@@ -106,6 +110,8 @@ class AgencyAuthController extends Controller
                 $req->session()->put('type','Agency');
                 $req->session()->put('email',$result[0]->email);
                 $req->session()->put('id',$result[0]->id);
+                
+                $req->session()->put('name',$result[0]->name);
                 return redirect('/agency/dashboard');
             }
             else{

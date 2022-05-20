@@ -731,9 +731,17 @@ $lang = [
                     <div class="col-md-6">
                       <label class="col-form-label">Password</label>
                       <div class="form-input position-relative">
-                        <input class="form-control" type="password" name="password" required="" placeholder="*********">
-                        <div class="show-hide"><span class="show"></span></div>
+                        <input class="form-control" id="myInput" type="password" name="password" required="" placeholder="*********">
+                        <div class="show-hide"><span onclick="passshow()" class="show"></span></div>
                       </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="col-form-label">Influencer Number</label> 
+                            <input class="form-control" value="" type="text" name="mobile" required=""  placeholder="9999999999">
+                        </div>
+                      </div>
+                    
                     </div>
                   </div>
                   {{-- <div class="form-group">
@@ -767,3 +775,13 @@ $lang = [
       
     </div>
 @endsection
+<script type="text/javascript">
+  function passshow() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script>

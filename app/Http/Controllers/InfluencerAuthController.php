@@ -19,6 +19,7 @@ class InfluencerAuthController extends Controller
             'language' => 'required',
             'age'      => 'required',
             'gender'   => 'required',
+            'mobile'   => 'required',
             'foi'      => 'required|array',
             'password' => 'required|min:3|max:20',
     		// 'cpassword' => 'required|min:3|max:20|same:password',
@@ -37,6 +38,7 @@ class InfluencerAuthController extends Controller
             $influencer->age = $data['age'];
             $influencer->gender = $data['gender'];
             $influencer->language = $data['language'];
+            $influencer->mobile = $data['mobile'];
             $influencer->foi = $foi;
             $influencer->email = $data['email'];
             $encrypted_password = crypt::encrypt($data['password']);
@@ -61,12 +63,13 @@ class InfluencerAuthController extends Controller
               CURLOPT_POSTFIELDS =>'{
                 "InfluencerID":"Influencer'.$myresult[0]->id.'",
                 "InfluencerGender":"'.$data['gender'].'",
-                "InfluencerFollowers":"",
+                "InfluencerFollowers":"0",
                 "InfluencerInterstes":"'.$foi.'",
                 "InfluencerAge":"'.$data['age'].'",
                 "InfluencerBrands":"",
                 "InfluencerInstaID":"",
                 "InfluencerEMAIL":"'.$data['email'].'",
+                "InfluencerNumber":"'.$data['mobile'].'",
                 "InfluencerFullName":"'.$data['name'].'",
                 "InfluencerCity":"'.$data['city'].'",
                 "InfluencerLanguage":"'.$data['language'].'"
@@ -77,7 +80,7 @@ class InfluencerAuthController extends Controller
             ));
             $response = curl_exec($curl);
             curl_close($curl);
-            
+            print_r($response);
             return redirect('/influencer/dashboard');
             //return redirect('/register');
         }

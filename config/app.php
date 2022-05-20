@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TwilioAccessTokenProvider::class,
+        App\Providers\TwilioChatGrantProvider::class,
 
     ],
 

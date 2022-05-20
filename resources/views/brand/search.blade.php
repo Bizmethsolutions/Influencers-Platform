@@ -833,6 +833,9 @@ $countries = [
                 <h5><span class="counter">96</span>M</h5>
               </div>
             </div>
+            <div class="card-footer row">
+                <button>Chat</button>
+            </div>
           </div>
         </div>
         @endforeach

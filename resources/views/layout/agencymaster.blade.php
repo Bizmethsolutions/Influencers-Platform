@@ -4,8 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cuba admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Cuba admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="description" content="Best Influence">
+    <meta name="keywords" content="Best Influence">
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
@@ -65,7 +65,6 @@
 <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
 <!-- feather icon js-->
 <script src="{{ asset('js/icons/feather-icon/feather.min.js') }}"></script>
-<script src="../assets/js/icons/feather-icon/feather-icon.js') }}"></script>
 <!-- scrollbar js-->
 <script src="{{ asset('js/scrollbar/simplebar.js') }}"></script>
 <script src="{{ asset('js/scrollbar/custom.js') }}"></script>
@@ -92,6 +91,10 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript" src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
       jQuery('#city').select2({
@@ -103,7 +106,10 @@
       jQuery('#foi').select2({
           placeholder: 'Field of interest'
       });
-
+      jQuery('#list_influencer').select2({
+          placeholder: 'List of influencer'
+      });
+      jQuery( "#due_date" ).datepicker();
       
     })
     function search(){
@@ -130,6 +136,16 @@
 {{-- <script src="{{ asset('js/theme-customizer/customizer.js') }}"></script> --}}
 <!-- login js-->
 <!-- Plugin used-->
+<!-- Twilio Common helpers and Twilio Chat JavaScript libs from CDN. -->
+    <script src="{{ asset('js/vendor/jquery-throttle.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery.loadTemplate-1.4.4.min.js') }}"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+    <script src="//media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js"></script>
+    <script src="//media.twiliocdn.com/sdk/js/chat/v4.0/twilio-chat.min.js"></script>
+    <script src="{{ asset('js/twiliochat.js') }}"></script>
+    <script src="{{ asset('js/dateformatter.js') }}"></script>
+
 </body>
 </html>
     

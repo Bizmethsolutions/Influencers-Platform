@@ -34,8 +34,8 @@
                   <div class="form-group">
                     <label class="col-form-label">Password</label>
                     <div class="form-input position-relative">
-                      <input class="form-control" type="password" name="password" required="" placeholder="*********">
-                      <div class="show-hide"><span class="show"></span></div>
+                      <input class="form-control" id="myInput" type="password" name="password" required="" placeholder="*********">
+                      <div class="show-hide"><span onclick="passshow()" class="show"></span></div>
                     </div>
                   </div>
                   {!! csrf_field() !!}
@@ -62,3 +62,13 @@
       
     </div>
 @endsection
+<script type="text/javascript">
+  function passshow() {
+    var x = document.getElementById("myInput");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script>

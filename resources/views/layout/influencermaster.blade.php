@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
-    <link rel="stylesheet" href="https://allyoucan.cloud/cdn/bootstrap/core/4.2.1/css/bootstrap.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.css') }}"> --}}
     <!-- ico-font-->
@@ -42,6 +42,7 @@
     <link id="color" rel="stylesheet" href="{{ asset('css/color-1.css') }}" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/twiliochat.css') }}">
   </head>
   <body>
     <!-- tap on top starts-->
@@ -68,7 +69,7 @@
 <script src="{{ asset('js/bootstrap/bootstrap.bundle.min.js') }}"></script>
 <!-- feather icon js-->
 <script src="{{ asset('js/icons/feather-icon/feather.min.js') }}"></script>
-<script src="../assets/js/icons/feather-icon/feather-icon.js') }}"></script>
+<!-- <script src="{{ asset('js/icons/feather-icon/feather-icon.js') }}') }}"></script> -->
 <!-- scrollbar js-->
 <script src="{{ asset('js/scrollbar/simplebar.js') }}"></script>
 <script src="{{ asset('js/scrollbar/custom.js') }}"></script>
@@ -93,6 +94,7 @@
 <!-- Theme js-->
 <script src="{{ asset('js/script.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
   $(document).ready(function() {
     $('.js-example-basic-multiple').select2({
@@ -100,9 +102,24 @@
     });
   });
 </script>
+<script type="text/javascript">
+  jQuery(document).ready( function () {
+    jQuery('#myTable').DataTable();
+} );
+</script>
 {{-- <script src="{{ asset('js/theme-customizer/customizer.js') }}"></script> --}}
 <!-- login js-->
 <!-- Plugin used-->
+<!-- Twilio Common helpers and Twilio Chat JavaScript libs from CDN. -->
+    <script src="{{ asset('js/vendor/jquery-throttle.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery.loadTemplate-1.4.4.min.js') }}"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
+    <script src="//media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js"></script>
+    <script src="//media.twiliocdn.com/sdk/js/chat/v4.0/twilio-chat.min.js"></script>
+    <script src="{{ asset('js/twiliochat.js') }}"></script>
+    <script src="{{ asset('js/dateformatter.js') }}"></script>
+
 </body>
 </html>
     

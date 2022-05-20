@@ -734,6 +734,13 @@ $lang = [
                   </select>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-form-label">Agency Number</label> 
+                    <input class="form-control" value="{{ $data->mobile }}" type="text" required=""  placeholder="9999999999">
+                </div>
+              </div>
+              
             </div>
 
             {!! csrf_field() !!}

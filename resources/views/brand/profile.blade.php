@@ -730,12 +730,18 @@ $lang = [
                   </select>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="col-form-label">Brand Agency</label> 
-                  <input class="form-control" value="{{ $data->agency }}" type="text" required="" name="agency">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-form-label">Brand Agency</label> 
+                        <input class="form-control" value="{{ $data->agency }}" type="text" required="" name="agency">
+                    </div>
                 </div>
-              </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-form-label">Brand Number</label> 
+                        <input class="form-control" value="{{ $data->mobile }}" type="text" required="" name="mobile">
+                    </div>
+                </div>
             </div>
 
             {!! csrf_field() !!}

@@ -41,5 +41,11 @@ return [
         'client_secret' => '907b62e0f59021d9419bcfd141aa393d',
         'redirect' => 'https://bizmeth.co.in/BI/auth/facebook/callback',
     ],
+    'twilio' => [
+        'accountSid' => env('TWILIO_ACCOUNT_SID'),
+        'apiKey' => env('TWILIO_API_KEY'),
+        'apiSecret' => env('TWILIO_API_SECRET'),
+        'chatServiceSid' => env('TWILIO_CHAT_SERVICE_SID'),
+    ],
 
 ];

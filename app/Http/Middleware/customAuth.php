@@ -22,8 +22,9 @@ class customAuth
             return redirect('/');
         }
         else if(($path!="login" && !Session::get('email')) && ($path!="register" && !Session::get('email'))){
-            return redirect('/login');
+            return redirect('/');
         }
+        
         return $next($request);
     }
 }

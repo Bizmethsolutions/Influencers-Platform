@@ -34,6 +34,7 @@ class BrandAuthController extends Controller
             $req->session()->put('email',$data['email']);
             $myresult = DB::table('brands')->where('email',$data['email'])->get();
             $req->session()->put('id',$myresult[0]->id);
+            $req->session()->put('name',$myresult[0]->name);
             return redirect('/brand/dashboard');
             //return redirect('/register');
         }
@@ -69,8 +70,10 @@ class BrandAuthController extends Controller
                 $req->session()->put('type','Brand');
                 $req->session()->put('email',$result[0]->email);
                 $req->session()->put('id',$result[0]->id);
-                $myresult = DB::table('brands')->where('email',$data['email'])->get();
+
+                $myresult = DB::table('brands')->where('email',$result[0]->email)->get();
                 $req->session()->put('id',$myresult[0]->id);
+                $req->session()->put('name',$myresult[0]->name);
                 return redirect('/brand/dashboard');
             }
             else{

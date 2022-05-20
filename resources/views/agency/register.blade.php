@@ -706,6 +706,12 @@ $lang = [
                         <input class="form-control"  type="password" required="" name="password">
                       </div>
                     </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="col-form-label">Agency Number</label>
+                        <input class="form-control"  type="text" required="" name="mobile" placeholder="9999999999">
+                      </div>
+                    </div>
                   </div>
                   {!! csrf_field() !!}
                   <div class="form-group mb-0">

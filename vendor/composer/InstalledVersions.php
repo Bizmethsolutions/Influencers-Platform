@@ -1318,6 +1318,15 @@ private static $installed = array (
       ),
       'reference' => 'b43b05cf43c1b6d849478965062b6ef73e223bb5',
     ),
+    'twilio/sdk' => 
+    array (
+      'pretty_version' => '6.37.0',
+      'version' => '6.37.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '72d4053d9d9f727f5d5490daca24ba035e279c31',
+    ),
     'vlucas/phpdotenv' => 
     array (
       'pretty_version' => 'v5.3.0',
