@@ -22,19 +22,30 @@ class AgencyController extends Controller
         return view("agency.profile",compact('foi','data'));
     }
 
-    function profile_update(Request $request){
+    function createbrands(){
+        $foi = DB::table('field_of_interest')->orderBy('name', 'ASC')->get();
+        return view("agency.create",compact('foi'));
+    }
+
+    function editbrands($id){
+        $brands = DB::table('brands')->where('id',$id)->first();
+        $foi = DB::table('field_of_interest')->orderBy('name', 'ASC')->get();
+        return view("agency.edit",compact('foi','brands'));
+    }
+
+
+    function update_brands(Request $request){
         $pro = $request->session()->all();
         $name = $request->input('name');
         $brand_type = $request->input('brand_type');
         $city = $request->input('city');
         $agency = $request->input('agency');
         $language = $request->input('language');
+        $email = $request->input('email');
         $data= array('name' => $name,'brand_type' => $brand_type,'language'=>$language,'city'=>$city,'agency'=>$agency);
-        DB::table('agency')->where('email', $pro['email'])->update($data);
         $curl = curl_init();
-
         curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://o6zw8vqdpd.execute-api.eu-central-1.amazonaws.com/dev',
+          CURLOPT_URL => 'https://r0eqy06qfi.execute-api.eu-central-1.amazonaws.com/dev',
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
@@ -43,11 +54,13 @@ class AgencyController extends Controller
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => 'POST',
           CURLOPT_POSTFIELDS =>'{
-            "BrandName":"'.$name.'",
-            "BrandType":"'.$brand_type.'",
-            "BrandLanguage":"'.$language.'",
-            "BrandCity":"'.$city.'",
-            "BrandAgency":"'.$agency.'"
+            "event_type"      : "update_brand_in_agency_protfolio",
+            "agencyID"        : "Agency'.$pro['id'].'",
+            "BrandName"       : "'.$name.'",
+            "BrandLanguage"   : "'.$language.'",
+            "BrandCity"       : "'.$city.'",
+            "BrandType"       : "'.$brand_type.'",
+            "BrandEmail"      : "'.$email.'"
         }',
           CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json'
@@ -57,7 +70,19 @@ class AgencyController extends Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        //echo $response;
+        DB::table('brands')->where('id', $request->input('id'))->update($data);
+        return redirect('/agency/list-brands')->with('success', 'Data updated successfully');
+    }
+
+    function profile_update(Request $request){
+        $pro = $request->session()->all();
+        $name = $request->input('name');
+        $city = $request->input('city');
+        $agency = $request->input('agency');
+        $language = $request->input('language');
+        $data= array('name' => $name,'language'=>$language,'city'=>$city,'agency'=>$agency);
+        DB::table('agency')->where('email', $pro['email'])->update($data);
+        
         return redirect('/agency/profile')->with('success', 'Profile updated successfully');
     }
 
@@ -166,6 +191,34 @@ class AgencyController extends Controller
             $agency->password = $encrypted_password;
             $agency->agency_id = $datas->id;
             $agency->save();
+            
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => 'https://r0eqy06qfi.execute-api.eu-central-1.amazonaws.com/dev',
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => '',
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 0,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => 'POST',
+              CURLOPT_POSTFIELDS =>'{
+                "event_type"      : "add_brand_to_agency_protfolio",
+                "agencyID"        : "Agency'.$pro['id'].'",
+                "BrandName"       : "'.$data['name'].'",
+                "BrandLanguage"   : "'.$data['language'].'",
+                "BrandCity"       : "'.$data['city'].'",
+                "BrandType"       : "'.$data['brand_type'].'",
+                "BrandEmail"      : "'.$data['email'].'"
+            }',
+              CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+              ),
+            ));
+
+            $response = curl_exec($curl);
+            //print_r($response);
+            curl_close($curl);
             $request->session()->flash('success','Brand saved successfully');
             return redirect('/agency/create-brands'); 
         }
@@ -173,6 +226,40 @@ class AgencyController extends Controller
             $request->session()->flash('error','This Email id is already exists.');
             return redirect('/agency/create-brands');
         }
+    }
+
+    function delete_brands($id,$name,Request $request){
+      $pro = $request->session()->all();
+      $finalResult = DB::table('brands')->where('id', $id)->delete();
+      if($finalResult){
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://r0eqy06qfi.execute-api.eu-central-1.amazonaws.com/dev',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS =>'{
+            "event_type"      : "remove_brand_from_agency_protfolio",
+            "agencyID"        : "Agency'.$pro['id'].'",
+            "BrandName"       : "'.$name.'"
+        }',
+          CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json'
+          ),
+        ));
+
+        $response = curl_exec($curl);
+        //print_r($response);
+        curl_close($curl);
+      }
+
+      $request->session()->flash('success','Brand deleted successfully');
+      return redirect('/agency/list-brands'); 
+        
     }
     
     function list_brands(Request $request){
